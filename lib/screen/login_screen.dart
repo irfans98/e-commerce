@@ -172,14 +172,7 @@ class LoginScreen extends StatelessWidget {
                         "Register Now",
                         style: TextStyle(color: Color(0xff374ABE)),
                       ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUpScreen(),
-                          ),
-                        );
-                      },
+                      onTap: () {},
                     )
                   ],
                 ),

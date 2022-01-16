@@ -88,13 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
         Container(
           margin: EdgeInsets.only(top: 30),
           child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SignUpScreen(),
-                ),
-              );
-            },
+            onTap: () {},
             child: const Text(
               "SIGN UP",
               style: TextStyle(
