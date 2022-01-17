@@ -1,5 +1,6 @@
 import 'package:ecommerce/screen/auth_screen.dart';
 import 'package:ecommerce/screen/home_items_detail.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,6 +11,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<void> _handleRefresh() async {
+    return await Future.delayed(Duration(seconds: 2));
+  }
+
   @override
   Widget build(BuildContext context) {
     return initScreen(context);
@@ -96,25 +101,61 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: ListView(
-          children: [
-            Row(
-              children: [
-                const Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10, top: 20),
-                    child: Text(
-                      "Categories",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+      body: LiquidPullToRefresh(
+        onRefresh: _handleRefresh,
+        color: const Color(0xff7990DD),
+        animSpeedFactor: 2,
+        showChildOpacityTransition: false,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: ListView(
+            children: [
+              Row(
+                children: [
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10, top: 20),
+                      child: Text(
+                        "Categories",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20, right: 20),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: const Text(
+                        "See All",
+                        style: TextStyle(
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                child: itemList(),
+              ),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10, top: 20),
+                      child: Text(
+                        "Featured",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: EdgeInsets.only(top: 20, right: 20),
                     child: GestureDetector(
                       onTap: () {},
@@ -124,27 +165,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.deepPurple,
                         ),
                       ),
-                    ))
-              ],
-            ),
-            Container(
-              child: itemList(),
-            ),
-            Row(
-              children: [
-                const Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10, top: 20),
-                    child: Text(
-                      "Featured",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                child: itemList(),
+              ),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10, top: 20),
+                      child: Text(
+                        "Featured",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 20, right: 20),
                     child: GestureDetector(
                       onTap: () {},
@@ -154,13 +196,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.deepPurple,
                         ),
                       ),
-                    ))
-              ],
-            ),
-            Container(
-              child: itemList(),
-            ),
-          ],
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                child: itemList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
